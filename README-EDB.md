@@ -106,7 +106,7 @@ EDB is a trusted PostgreSQL partner with deep integration into Red Hat's ecosyst
 | Persona | Challenge | What They Gain |
 |---------|-----------|---------------|
 | **IT Ops Engineer / SRE** | AAP downtime blocks critical automation; manual DR procedures require coordinating database restore, service startup, and health validation across 16+ VMs | Automated failover orchestration via EFM; tested recovery procedures with concrete validation commands; complete operational runbook for daily health checks and emergency failover |
-| **Automation Architect** | Uncertainty about how to design production-ready AAP for mission-critical use cases; existing single-datacenter deployments lack disaster recovery capability | Production-validated reference architecture based on Red Hat's Container Enterprise Topology; detailed component specifications, network topology, and firewall rules; complete implementation guidance for this 26-VM enterprise design |
+| **Automation Architect** | Uncertainty about how to design production-ready AAP for mission-critical use cases; existing single-datacenter deployments lack disaster recovery capability | Production-validated reference architecture based on Red Hat's Container Enterprise Topology; detailed component specifications, network topology, and firewall rules; complete implementation guidance for this 24-VM enterprise design |
 | **IT Manager / Director** | Business justification required for DR investment; inability to commit to SLA targets without proven recovery procedures | Measurable RTO/RPO targets (5 minutes / 5 seconds); infrastructure scale and resource planning guidance; implementation roadmap with clear phase gates from planning through production cutover |
 
 ### Recommended Demos and Self-Paced Labs
@@ -144,11 +144,11 @@ EDB is a trusted PostgreSQL partner with deep integration into Red Hat's ecosyst
 
 **Total Resource Footprint:**
 
-- **26 VMs** total (13 per datacenter)
+- **24 VMs** total (12 per datacenter)
   - 8 AAP component VMs per DC (2 gateway, 2 controller, 2 hub, 2 EDA)
   - 3 PostgreSQL VMs per DC
-  - 1 Barman per DC (uneeded if you use a different backup solution)
-- **68 vCPU, 272GB RAM per datacenter**
+  - 1 Barman per DC (2 vCPU, 8GB RAM; unneeded if you use a different backup solution)
+- **58 vCPU, 232GB RAM per datacenter** (32/128GB AAP, 24/96GB PostgreSQL, 2/8GB Barman)
 - **500GB SSD per PostgreSQL node** (3000 IOPS minimum)
 - **WAN bandwidth:** 100 Mbps minimum, 1 Gbps recommended for replication
 
@@ -281,7 +281,7 @@ sequenceDiagram
 
 ### Component Specifications
 
-**Quick reference:** 26 VMs total (13 per datacenter), 68 vCPU / 272GB RAM per datacenter
+**Quick reference:** 24 VMs total (12 per datacenter), 58 vCPU / 232GB RAM per datacenter
 
 <details markdown="1">
 <summary><strong>View detailed component specifications →</strong></summary>
@@ -294,7 +294,7 @@ sequenceDiagram
 | **Automation Controller** | RHEL 9.4+, Podman | 2 | 4 vCPU, 16GB RAM, 60GB disk | 8 vCPU, 32GB RAM |
 | **Automation Hub** | RHEL 9.4+, Podman + Redis | 2 | 4 vCPU, 16GB RAM, 60GB disk | 8 vCPU, 32GB RAM |
 | **Event-Driven Ansible** | RHEL 9.4+, Podman + Redis | 2 | 4 vCPU, 16GB RAM, 60GB disk | 8 vCPU, 32GB RAM |
-| **Total AAP Infrastructure** | - | **9 VMs** | - | **34 vCPU, 136GB RAM** |
+| **Total AAP Infrastructure** | - | **8 VMs** | - | **32 vCPU, 128GB RAM** |
 
 #### PostgreSQL Database Cluster (Per Datacenter)
 
@@ -388,7 +388,7 @@ WAN Connectivity:
 
 **Tasks:**
 
-1. Provision VMs (26 total)
+1. Provision VMs (24 total)
    - DC1: 8 AAP VMs + 3 PostgreSQL + 1 Barman (or your backup solution of choice)
    - DC2: 8 AAP VMs + 3 PostgreSQL + 1 Barman (or your backup solution of choice)
 2. Install RHEL 9.4+ on all nodes
@@ -1428,8 +1428,8 @@ By implementing this multi-datacenter Active-Passive DR architecture, you have d
 
 **Infrastructure scale:**
 
-- **26 VMs total** (13 per datacenter)
-- **68 vCPU, 272GB RAM per datacenter**
+- **24 VMs total** (12 per datacenter)
+- **58 vCPU, 232GB RAM per datacenter**
 - **Conforms to Red Hat AAP 2.6 Container Enterprise Topology** for single-datacenter design
 - **Extends with multi-datacenter Active-Passive DR** for mission-critical use cases
 
