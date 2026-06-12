@@ -200,11 +200,7 @@ EDB is a trusted PostgreSQL partner with deep integration into Red Hat's ecosyst
 │  │  eda1-dc1                │  │   │  │  eda1-dc2                │   │
 │  │  eda2-dc1                │  │   │  │  eda2-dc2                │   │
 │  │    + Redis colocated     │  │   │  │    + Redis (stopped)     │   │
-│  └──────────────────────────┘  │   │  └──────────────────────────┘   │
-│  ┌───────────────────────────┐ │   │  ┌───────────────────────────┐  │
-│  │  HAProxy Load Balancer    │ │   │  │  HAProxy Load Balancer    │  │
-│  │  vip-dc1.example.com      │ │   │  │  vip-dc2.example.com      │  │
-│  └────────┬──────────────────┘ │   │  └────────┬──────────────────┘  │
+│  └────────┬─────────────────┘  │   │  └────────┬─────────────────┘   │
 │           │                    │   │           │                     │         
 │  ┌────────▼───────────────────┐│   │  ┌────────▼───────────────────┐ │
 │  │ PostgreSQL Cluster (3)     ││   │  │ PostgreSQL Cluster (3)     │ │
